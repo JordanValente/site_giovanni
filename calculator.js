@@ -43,8 +43,9 @@ const PRICING = {
     base: { min: 850, max: 1200 }
 };
 
-const MAX_FILES = 5;
-const MAX_FILE_SIZE = 10 * 1024 * 1024;
+const MAX_FILES     = 5;
+const MAX_FILE_SIZE = 5 * 1024 * 1024;    // 5 Mo / fichier
+const MAX_TOTAL     = 7 * 1024 * 1024;    // 7 Mo total (marge sous la limite Netlify 8 Mo)
 
 // --- State ---
 const state = {
@@ -331,6 +332,10 @@ function renderFileList() {
     });
 }
 
+function totalUploadSize() {
+    return state.files.reduce((s, f) => s + f.file.size, 0);
+}
+
 function addFiles(fileList) {
     for (const file of fileList) {
         if (state.files.length >= MAX_FILES) {
@@ -338,8 +343,12 @@ function addFiles(fileList) {
             break;
         }
         if (file.size > MAX_FILE_SIZE) {
-            alert(`Le fichier "${file.name}" dépasse 10 Mo.`);
+            alert(`Le fichier « ${file.name} » dépasse 5 Mo. Merci de le compresser (par exemple avec https://tinypng.com).`);
             continue;
+        }
+        if (totalUploadSize() + file.size > MAX_TOTAL) {
+            alert(`La taille totale des photos dépasse ${Math.round(MAX_TOTAL / 1024 / 1024)} Mo. Merci de retirer ou compresser des photos.`);
+            break;
         }
         const entry = { file, preview: null };
         if (file.type.startsWith('image/')) {
@@ -462,7 +471,7 @@ document.getElementById('sendQuote').addEventListener('click', async function() 
     const thickness = state.coating === 'liner' ? state.thicknessLiner : state.thicknessPvc;
 
     if (IS_NETLIFY) {
-        // Netlify Forms : champs à plat + form-name
+        // Netlify Forms : champs à plat + form-name + 1 fichier par champ
         fd.append('form-name',    'devis');
         fd.append('shape',        state.shape);
         fd.append('structure',    state.structure);
@@ -478,7 +487,10 @@ document.getElementById('sendQuote').addEventListener('click', async function() 
         fd.append('volume',       String(quote.geom.volume) + ' m³');
         fd.append('estimate-min', String(quote.totalMin) + ' €');
         fd.append('estimate-max', String(quote.totalMax) + ' €');
-        state.files.forEach(f => fd.append('files', f.file, f.file.name));
+        // Netlify : un fichier par champ nommé (photo1 → photo5)
+        state.files.slice(0, 5).forEach((f, i) => {
+            fd.append(`photo${i + 1}`, f.file, f.file.name);
+        });
     } else {
         // PHP fallback : JSON structuré
         fd.append('project', JSON.stringify({
@@ -551,15 +563,20 @@ if (contactForm) {
         btn.disabled = true;
         btn.innerHTML = 'Envoi en cours…';
 
-        if (IS_NETLIFY) fd.append('form-name', 'contact');
-        const endpoint = IS_NETLIFY ? '/' : 'send-contact.php';
-
         try {
-            const res = await fetch(endpoint, { method: 'POST', body: fd });
-
+            let res;
             if (IS_NETLIFY) {
+                // Contact form Netlify : URL-encoded (pas de fichier)
+                fd.append('form-name', 'contact');
+                const body = new URLSearchParams(fd).toString();
+                res = await fetch('/', {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body
+                });
                 if (!res.ok) throw new Error(`Erreur Netlify (HTTP ${res.status})`);
             } else {
+                res = await fetch('send-contact.php', { method: 'POST', body: fd });
                 const data = await res.json().catch(() => ({ ok: false, error: 'Réponse serveur invalide.' }));
                 if (!res.ok || !data.ok) throw new Error(data.error || 'Erreur inconnue.');
             }

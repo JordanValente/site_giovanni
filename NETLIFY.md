@@ -81,9 +81,18 @@ Si vous avez un domaine `goodpoolconcept.fr` :
 
 - **100 soumissions/mois** (formulaires cumulés)
 - **10 Go de bande passante/mois** (largement suffisant pour un site vitrine)
-- **10 Mo max par fichier uploadé**
+- **8 Mo max par soumission** (total, photos incluses)
+- **30 s max** pour l'upload d'une soumission
+- **Un fichier par champ** — c'est pour ça que le formulaire déclare 5 champs distincts (`photo1` à `photo5`)
 
 Au-delà : plan Pro à 19 $/mois avec 1 000 soumissions incluses.
+
+Côté site, les limites sont réglées dans `calculator.js` :
+- `MAX_FILES = 5` (5 photos max)
+- `MAX_FILE_SIZE = 5 Mo` par photo
+- `MAX_TOTAL = 7 Mo` cumulé (marge sous les 8 Mo de Netlify)
+
+Si le client atteint la limite, un message le prévient et lui propose d'utiliser https://tinypng.com pour compresser.
 
 ## Modes PHP vs Netlify
 

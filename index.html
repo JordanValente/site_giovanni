@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- Formulaires cachés pour la détection Netlify Forms (parseur build-time) -->
-    <form name="devis" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+    <form name="devis" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
         <input type="hidden" name="form-name" value="devis">
         <input type="text" name="name">
         <input type="email" name="email">
@@ -33,10 +33,14 @@
         <input type="hidden" name="volume">
         <input type="hidden" name="estimate-min">
         <input type="hidden" name="estimate-max">
-        <input type="file" name="files" multiple>
+        <input type="file" name="photo1">
+        <input type="file" name="photo2">
+        <input type="file" name="photo3">
+        <input type="file" name="photo4">
+        <input type="file" name="photo5">
         <input type="text" name="bot-field">
     </form>
-    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
         <input type="hidden" name="form-name" value="contact">
         <input type="text" name="name">
         <input type="email" name="email">
@@ -958,7 +962,7 @@
 
                             <div class="field field-full">
                                 <label>Photos de votre bassin <span class="opt">(recommandé)</span></label>
-                                <p class="field-hint">Joignez 1 à 5 photos de votre piscine actuelle pour affiner le devis. Formats acceptés : JPG, PNG, HEIC · 10 Mo max par fichier.</p>
+                                <p class="field-hint">Joignez 1 à 5 photos de votre piscine actuelle pour affiner le devis. Formats acceptés : JPG, PNG, HEIC · 5 Mo max par photo, 7 Mo total.</p>
                                 <div class="upload-zone" id="uploadZone">
                                     <input type="file" id="quoteFiles" name="files" accept="image/*,.heic" multiple hidden>
                                     <div class="upload-inner">
@@ -967,7 +971,7 @@
                                         </div>
                                         <div class="upload-text">
                                             <strong>Cliquez pour choisir</strong> ou glissez vos photos
-                                            <span>Jusqu'à 5 photos · 10 Mo max</span>
+                                            <span>Jusqu'à 5 photos · 5 Mo max chacune</span>
                                         </div>
                                     </div>
                                 </div>
