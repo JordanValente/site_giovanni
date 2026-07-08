@@ -489,7 +489,7 @@ document.getElementById('sendQuote').addEventListener('click', async function() 
     } catch (err) {
         btn.innerHTML = originalHTML;
         btn.disabled = false;
-        alert('Impossible d\'envoyer la demande : ' + err.message + '\n\nContactez-nous directement à goodpoolconcep@outlook.fr');
+        alert('Impossible d\'envoyer la demande : ' + err.message + '\n\nContactez-nous directement à goodpoolconcept@outlook.fr');
     }
 });
 
@@ -528,7 +528,7 @@ if (contactForm) {
         } catch (err) {
             btn.innerHTML = originalHTML;
             btn.disabled = false;
-            alert('Impossible d\'envoyer le message : ' + err.message + '\n\nContactez-nous directement à goodpoolconcep@outlook.fr');
+            alert('Impossible d\'envoyer le message : ' + err.message + '\n\nContactez-nous directement à goodpoolconcept@outlook.fr');
         }
     });
 }

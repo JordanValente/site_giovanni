@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$TO = 'goodpoolconcep@outlook.fr';
+$TO = 'goodpoolconcept@outlook.fr';
 
 function clean($v) { return trim(strip_tags((string)$v)); }
 

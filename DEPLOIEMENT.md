@@ -30,7 +30,7 @@ Ouvrez `votresite.fr/test.php`. Si une page bleue avec les infos PHP apparaît �
 Sur la plupart des hébergements mutualisés français, la fonction `mail()` PHP fonctionne d'office.
 
 - Ouvrez le site, remplissez le formulaire de devis et envoyez.
-- Un mail doit arriver à **goodpoolconcep@outlook.fr** en moins de 2 minutes.
+- Un mail doit arriver à **goodpoolconcept@outlook.fr** en moins de 2 minutes.
 - Vérifiez aussi les spams/courriers indésirables Outlook la première fois.
 
 ### Si le mail n'arrive pas
@@ -66,13 +66,13 @@ $mail = new PHPMailer(true);
 $mail->isSMTP();
 $mail->Host       = 'smtp-mail.outlook.com';
 $mail->SMTPAuth   = true;
-$mail->Username   = 'goodpoolconcep@outlook.fr';
+$mail->Username   = 'goodpoolconcept@outlook.fr';
 $mail->Password   = 'MOT_DE_PASSE_APPLICATION_OUTLOOK';
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port       = 587;
 
-$mail->setFrom('goodpoolconcep@outlook.fr', 'Good Pool Concept');
-$mail->addAddress('goodpoolconcep@outlook.fr');
+$mail->setFrom('goodpoolconcept@outlook.fr', 'Good Pool Concept');
+$mail->addAddress('goodpoolconcept@outlook.fr');
 $mail->addReplyTo($email, $name);
 
 $mail->isHTML(true);

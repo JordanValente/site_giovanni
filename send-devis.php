@@ -2,7 +2,7 @@
 /**
  * Good Pool Concept — Envoi devis avec pièces jointes
  * Reçoit les données du calculateur + les photos et envoie un mail
- * à goodpoolconcep@outlook.fr avec toutes les infos.
+ * à goodpoolconcept@outlook.fr avec toutes les infos.
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$TO        = 'goodpoolconcep@outlook.fr';
+$TO        = 'goodpoolconcept@outlook.fr';
 $MAX_FILES = 5;
 $MAX_SIZE  = 10 * 1024 * 1024;
 $ALLOWED   = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
