@@ -406,6 +406,12 @@ function clearError(fieldId) {
     field.classList.remove('has-error');
 }
 
+// --- Endpoint config ---
+// Détection auto : Netlify si hébergé sur *.netlify.app / *.netlify.com / si un flag est présent,
+// sinon fallback PHP.
+const IS_NETLIFY = /netlify\.(app|com)$/.test(location.hostname)
+                || document.querySelector('meta[name="mailer"]')?.content === 'netlify';
+
 // --- Send quote ---
 document.getElementById('sendQuote').addEventListener('click', async function() {
     const nameEl = document.getElementById('quoteName');
@@ -452,36 +458,63 @@ document.getElementById('sendQuote').addEventListener('click', async function() 
     fd.append('email', emailEl.value.trim());
     fd.append('phone', phoneEl.value.trim());
     fd.append('city',  cityEl.value.trim());
-    fd.append('project', JSON.stringify({
-        shape:     state.shape,
-        structure: state.structure,
-        length:    state.length,
-        width:     state.width,
-        depthMin:  state.depthMin,
-        depthMax:  state.depthMax,
-        coating:   state.coating,
-        thickness: state.coating === 'liner' ? state.thicknessLiner : state.thicknessPvc,
-        color:     state.color,
-        options:   state.options
-    }));
-    fd.append('estimate', JSON.stringify({
-        surface:  quote.geom.developedSurface,
-        volume:   quote.geom.volume,
-        totalMin: quote.totalMin,
-        totalMax: quote.totalMax
-    }));
-    state.files.forEach(f => fd.append('files[]', f.file, f.file.name));
 
+    const thickness = state.coating === 'liner' ? state.thicknessLiner : state.thicknessPvc;
+
+    if (IS_NETLIFY) {
+        // Netlify Forms : champs à plat + form-name
+        fd.append('form-name',    'devis');
+        fd.append('shape',        state.shape);
+        fd.append('structure',    state.structure);
+        fd.append('length',       String(state.length));
+        fd.append('width',        String(state.width));
+        fd.append('depthMin',     String(state.depthMin));
+        fd.append('depthMax',     String(state.depthMax));
+        fd.append('coating',      state.coating);
+        fd.append('thickness',    thickness + '/100');
+        fd.append('color',        state.color);
+        fd.append('options',      state.options.join(', ') || 'aucune');
+        fd.append('surface',      String(quote.geom.developedSurface) + ' m²');
+        fd.append('volume',       String(quote.geom.volume) + ' m³');
+        fd.append('estimate-min', String(quote.totalMin) + ' €');
+        fd.append('estimate-max', String(quote.totalMax) + ' €');
+        state.files.forEach(f => fd.append('files', f.file, f.file.name));
+    } else {
+        // PHP fallback : JSON structuré
+        fd.append('project', JSON.stringify({
+            shape:     state.shape,
+            structure: state.structure,
+            length:    state.length,
+            width:     state.width,
+            depthMin:  state.depthMin,
+            depthMax:  state.depthMax,
+            coating:   state.coating,
+            thickness: thickness,
+            color:     state.color,
+            options:   state.options
+        }));
+        fd.append('estimate', JSON.stringify({
+            surface:  quote.geom.developedSurface,
+            volume:   quote.geom.volume,
+            totalMin: quote.totalMin,
+            totalMax: quote.totalMax
+        }));
+        state.files.forEach(f => fd.append('files[]', f.file, f.file.name));
+    }
+
+    const endpoint     = IS_NETLIFY ? '/' : 'send-devis.php';
     const originalHTML = btn.innerHTML;
     btn.disabled = true;
     btn.innerHTML = 'Envoi en cours…';
 
     try {
-        const res = await fetch('send-devis.php', { method: 'POST', body: fd });
-        const data = await res.json().catch(() => ({ ok: false, error: 'Réponse serveur invalide.' }));
+        const res = await fetch(endpoint, { method: 'POST', body: fd });
 
-        if (!res.ok || !data.ok) {
-            throw new Error(data.error || 'Erreur lors de l\'envoi.');
+        if (IS_NETLIFY) {
+            if (!res.ok) throw new Error(`Erreur Netlify (HTTP ${res.status})`);
+        } else {
+            const data = await res.json().catch(() => ({ ok: false, error: 'Réponse serveur invalide.' }));
+            if (!res.ok || !data.ok) throw new Error(data.error || 'Erreur lors de l\'envoi.');
         }
 
         btn.innerHTML = '✓ Demande envoyée — nous vous recontactons sous 24h';
@@ -518,10 +551,19 @@ if (contactForm) {
         btn.disabled = true;
         btn.innerHTML = 'Envoi en cours…';
 
+        if (IS_NETLIFY) fd.append('form-name', 'contact');
+        const endpoint = IS_NETLIFY ? '/' : 'send-contact.php';
+
         try {
-            const res  = await fetch('send-contact.php', { method: 'POST', body: fd });
-            const data = await res.json().catch(() => ({ ok: false, error: 'Réponse serveur invalide.' }));
-            if (!res.ok || !data.ok) throw new Error(data.error || 'Erreur inconnue.');
+            const res = await fetch(endpoint, { method: 'POST', body: fd });
+
+            if (IS_NETLIFY) {
+                if (!res.ok) throw new Error(`Erreur Netlify (HTTP ${res.status})`);
+            } else {
+                const data = await res.json().catch(() => ({ ok: false, error: 'Réponse serveur invalide.' }));
+                if (!res.ok || !data.ok) throw new Error(data.error || 'Erreur inconnue.');
+            }
+
             btn.innerHTML = '✓ Message envoyé';
             btn.style.background = '#10b981';
             contactForm.reset();

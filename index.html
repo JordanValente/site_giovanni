@@ -12,6 +12,40 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Formulaires cachés pour la détection Netlify Forms (parseur build-time) -->
+    <form name="devis" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+        <input type="hidden" name="form-name" value="devis">
+        <input type="text" name="name">
+        <input type="email" name="email">
+        <input type="tel" name="phone">
+        <input type="text" name="city">
+        <input type="hidden" name="shape">
+        <input type="hidden" name="structure">
+        <input type="hidden" name="length">
+        <input type="hidden" name="width">
+        <input type="hidden" name="depthMin">
+        <input type="hidden" name="depthMax">
+        <input type="hidden" name="coating">
+        <input type="hidden" name="thickness">
+        <input type="hidden" name="color">
+        <input type="hidden" name="options">
+        <input type="hidden" name="surface">
+        <input type="hidden" name="volume">
+        <input type="hidden" name="estimate-min">
+        <input type="hidden" name="estimate-max">
+        <input type="file" name="files" multiple>
+        <input type="text" name="bot-field">
+    </form>
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="contact">
+        <input type="text" name="name">
+        <input type="email" name="email">
+        <input type="tel" name="phone">
+        <input type="text" name="city">
+        <textarea name="message"></textarea>
+        <input type="text" name="bot-field">
+    </form>
+
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
