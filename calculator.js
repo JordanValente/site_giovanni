@@ -407,12 +407,13 @@ function clearError(fieldId) {
 }
 
 // --- Send quote ---
-document.getElementById('sendQuote').addEventListener('click', function() {
+document.getElementById('sendQuote').addEventListener('click', async function() {
     const nameEl = document.getElementById('quoteName');
     const emailEl = document.getElementById('quoteEmail');
     const phoneEl = document.getElementById('quotePhone');
     const cityEl = document.getElementById('quoteCity');
     const consentEl = document.getElementById('quoteConsent');
+    const btn = this;
 
     let valid = true;
 
@@ -444,41 +445,93 @@ document.getElementById('sendQuote').addEventListener('click', function() {
 
     if (!valid) return;
 
-    // Prepare payload (would normally POST to backend)
     const quote = computeQuote();
-    const payload = {
-        contact: {
-            name: nameEl.value.trim(),
-            email: emailEl.value.trim(),
-            phone: phoneEl.value.trim(),
-            city: cityEl.value.trim()
-        },
-        project: {
-            shape: state.shape,
-            structure: state.structure,
-            length: state.length,
-            width: state.width,
-            depthMin: state.depthMin,
-            depthMax: state.depthMax,
-            coating: state.coating,
-            thickness: state.coating === 'liner' ? state.thicknessLiner : state.thicknessPvc,
-            color: state.color,
-            options: state.options
-        },
-        estimate: {
-            surface: quote.geom.developedSurface,
-            volume: quote.geom.volume,
-            totalMin: quote.totalMin,
-            totalMax: quote.totalMax
-        },
-        filesCount: state.files.length
-    };
-    console.log('Devis payload →', payload);
 
-    this.innerHTML = '✓ Demande envoyée — nous vous recontactons sous 24h';
-    this.style.background = '#10b981';
-    this.disabled = true;
+    const fd = new FormData();
+    fd.append('name',  nameEl.value.trim());
+    fd.append('email', emailEl.value.trim());
+    fd.append('phone', phoneEl.value.trim());
+    fd.append('city',  cityEl.value.trim());
+    fd.append('project', JSON.stringify({
+        shape:     state.shape,
+        structure: state.structure,
+        length:    state.length,
+        width:     state.width,
+        depthMin:  state.depthMin,
+        depthMax:  state.depthMax,
+        coating:   state.coating,
+        thickness: state.coating === 'liner' ? state.thicknessLiner : state.thicknessPvc,
+        color:     state.color,
+        options:   state.options
+    }));
+    fd.append('estimate', JSON.stringify({
+        surface:  quote.geom.developedSurface,
+        volume:   quote.geom.volume,
+        totalMin: quote.totalMin,
+        totalMax: quote.totalMax
+    }));
+    state.files.forEach(f => fd.append('files[]', f.file, f.file.name));
+
+    const originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Envoi en cours…';
+
+    try {
+        const res = await fetch('send-devis.php', { method: 'POST', body: fd });
+        const data = await res.json().catch(() => ({ ok: false, error: 'Réponse serveur invalide.' }));
+
+        if (!res.ok || !data.ok) {
+            throw new Error(data.error || 'Erreur lors de l\'envoi.');
+        }
+
+        btn.innerHTML = '✓ Demande envoyée — nous vous recontactons sous 24h';
+        btn.style.background = '#10b981';
+    } catch (err) {
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+        alert('Impossible d\'envoyer la demande : ' + err.message + '\n\nContactez-nous directement à goodpoolconcep@outlook.fr');
+    }
 });
+
+// --- Contact form ---
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = contactForm.querySelector('button[type="submit"]');
+        const originalHTML = btn.innerHTML;
+        const fd = new FormData(contactForm);
+
+        const name    = (fd.get('name')    || '').toString().trim();
+        const email   = (fd.get('email')   || '').toString().trim();
+        const message = (fd.get('message') || '').toString().trim();
+
+        if (!name || !email || !message) {
+            alert('Merci de renseigner votre nom, votre email et un message.');
+            return;
+        }
+        if (!validateEmail(email)) {
+            alert('Format d\'email invalide.');
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = 'Envoi en cours…';
+
+        try {
+            const res  = await fetch('send-contact.php', { method: 'POST', body: fd });
+            const data = await res.json().catch(() => ({ ok: false, error: 'Réponse serveur invalide.' }));
+            if (!res.ok || !data.ok) throw new Error(data.error || 'Erreur inconnue.');
+            btn.innerHTML = '✓ Message envoyé';
+            btn.style.background = '#10b981';
+            contactForm.reset();
+        } catch (err) {
+            btn.innerHTML = originalHTML;
+            btn.disabled = false;
+            alert('Impossible d\'envoyer le message : ' + err.message + '\n\nContactez-nous directement à goodpoolconcep@outlook.fr');
+        }
+    });
+}
 
 // --- Nav scroll effect ---
 window.addEventListener('scroll', () => {

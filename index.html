@@ -1074,15 +1074,15 @@
                         </li>
                     </ul>
                 </div>
-                <form class="contact-form">
+                <form class="contact-form" novalidate>
                     <h3>Envoyer un message</h3>
                     <div class="form-grid">
-                        <input type="text" placeholder="Nom" required>
-                        <input type="email" placeholder="Email" required>
-                        <input type="tel" placeholder="Téléphone">
-                        <input type="text" placeholder="Ville">
+                        <input type="text" name="name" placeholder="Nom" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="tel" name="phone" placeholder="Téléphone">
+                        <input type="text" name="city" placeholder="Ville">
                     </div>
-                    <textarea placeholder="Décrivez votre projet..." rows="5"></textarea>
+                    <textarea name="message" placeholder="Décrivez votre projet..." rows="5" required></textarea>
                     <button type="submit" class="btn btn-primary btn-large">Envoyer le message
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
                     </button>
