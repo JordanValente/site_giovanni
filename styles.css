@@ -1125,7 +1125,38 @@ section { padding: 120px 0; }
 .contact-list li { display: flex; align-items: flex-start; gap: 16px; }
 .contact-list svg { color: var(--primary); flex-shrink: 0; margin-top: 4px; }
 .contact-list strong { display: block; color: var(--ink); font-weight: 600; margin-bottom: 2px; }
+.contact-list strong a { color: inherit; text-decoration: none; transition: var(--transition); }
+.contact-list strong a:hover { color: var(--primary); }
 .contact-list span { font-size: 0.85rem; color: var(--ink-muted); }
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 100px;
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+.social-btn svg { color: var(--primary); }
+.social-btn:hover {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: transparent;
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 169, 97, 0.3);
+}
+.social-btn:hover svg { color: var(--white); }
 .contact-form {
     padding: 40px;
     background: var(--white);
@@ -1146,6 +1177,22 @@ section { padding: 120px 0; }
 .footer h5 { color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; font-weight: 600; }
 .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 60px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 .footer-brand p { margin-top: 20px; font-size: 0.9rem; max-width: 320px; }
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+.footer-contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.88rem;
+    transition: var(--transition);
+}
+.footer-contact svg { color: var(--primary); flex-shrink: 0; }
+.footer-contact a:hover { color: var(--primary); }
 .footer-brand .nav-logo { color: var(--white); }
 .footer-brand .logo-text em { color: var(--accent); }
 .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem; }
