@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">peut
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GOOD POOL CONCEPT — Spécialiste rénovation piscine · Liner & PVC Armé</title>
     <meta name="description" content="Spécialiste rénovation piscine. Pose de liner et PVC armé sur mesure. Devis gratuit en ligne, intervention sur toute la région.">
@@ -12,44 +12,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Formulaires cachés pour la détection Netlify Forms (parseur build-time) -->
-    <form name="devis" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
-        <input type="hidden" name="form-name" value="devis">
-        <input type="text" name="name">
-        <input type="email" name="email">
-        <input type="tel" name="phone">
-        <input type="text" name="city">
-        <input type="hidden" name="shape">
-        <input type="hidden" name="structure">
-        <input type="hidden" name="length">
-        <input type="hidden" name="width">
-        <input type="hidden" name="depthMin">
-        <input type="hidden" name="depthMax">
-        <input type="hidden" name="coating">
-        <input type="hidden" name="thickness">
-        <input type="hidden" name="color">
-        <input type="hidden" name="options">
-        <input type="hidden" name="surface">
-        <input type="hidden" name="volume">
-        <input type="hidden" name="estimate-min">
-        <input type="hidden" name="estimate-max">
-        <input type="file" name="photo1">
-        <input type="file" name="photo2">
-        <input type="file" name="photo3">
-        <input type="file" name="photo4">
-        <input type="file" name="photo5">
-        <input type="text" name="bot-field">
-    </form>
-    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
-        <input type="hidden" name="form-name" value="contact">
-        <input type="text" name="name">
-        <input type="email" name="email">
-        <input type="tel" name="phone">
-        <input type="text" name="city">
-        <textarea name="message"></textarea>
-        <input type="text" name="bot-field">
-    </form>
-
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
@@ -637,84 +599,24 @@
                 <div class="calc-progress">
                     <div class="calc-progress-bar" id="progressBar"></div>
                     <div class="calc-steps">
-                        <span class="calc-step active" data-step="1"><i>1</i>Bassin</span>
-                        <span class="calc-step" data-step="2"><i>2</i>Dimensions</span>
-                        <span class="calc-step" data-step="3"><i>3</i>Revêtement</span>
-                        <span class="calc-step" data-step="4"><i>4</i>Options</span>
-                        <span class="calc-step" data-step="5"><i>5</i>Estimation</span>
+                        <span class="calc-step active" data-step="1"><i>1</i>Dimensions</span>
+                        <span class="calc-step" data-step="2"><i>2</i>Membrane PVC</span>
+                        <span class="calc-step" data-step="3"><i>3</i>Estimation</span>
                     </div>
                 </div>
 
                 <form id="calculatorForm" class="calc-form">
-                    <!-- Step 1: Shape -->
+                    <!-- Step 1: Dimensions -->
                     <div class="calc-panel active" data-panel="1">
-                        <h3>Quelle est la forme de votre bassin ?</h3>
-                        <p class="calc-hint">Sélectionnez la forme qui correspond le mieux à votre piscine actuelle.</p>
-                        <div class="option-grid options-4">
-                            <label class="option-card">
-                                <input type="radio" name="shape" value="rectangle" checked>
-                                <div class="option-visual">
-                                    <svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="6" width="52" height="28" rx="2"/></svg>
-                                </div>
-                                <span>Rectangulaire</span>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" name="shape" value="oval">
-                                <div class="option-visual">
-                                    <svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="30" cy="20" rx="26" ry="14"/></svg>
-                                </div>
-                                <span>Ovale</span>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" name="shape" value="round">
-                                <div class="option-visual">
-                                    <svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2"><circle cx="30" cy="20" r="15"/></svg>
-                                </div>
-                                <span>Ronde</span>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" name="shape" value="freeform">
-                                <div class="option-visual">
-                                    <svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 20c0-8 6-14 15-14s12 4 18 10 11 8 11 14-8 8-16 8-14-2-20-6-8-6-8-12z"/></svg>
-                                </div>
-                                <span>Forme libre</span>
-                            </label>
-                        </div>
-
-                        <h3 style="margin-top:2.5rem">Type de structure</h3>
-                        <div class="option-grid options-3">
-                            <label class="option-card small">
-                                <input type="radio" name="structure" value="beton" checked>
-                                <span>Béton</span>
-                            </label>
-                            <label class="option-card small">
-                                <input type="radio" name="structure" value="panneaux">
-                                <span>Panneaux</span>
-                            </label>
-                            <label class="option-card small">
-                                <input type="radio" name="structure" value="coque">
-                                <span>Coque polyester</span>
-                            </label>
-                        </div>
-
-                        <div class="calc-actions">
-                            <button type="button" class="btn btn-primary calc-next">Suivant
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Dimensions -->
-                    <div class="calc-panel" data-panel="2">
-                        <h3>Dimensions de votre bassin</h3>
-                        <p class="calc-hint">Renseignez les mesures approximatives. Nos équipes valideront lors de la visite technique.</p>
+                        <h3>Dimensions de votre bassin rectangulaire</h3>
+                        <p class="calc-hint">Renseignez les mesures de votre piscine. Le calcul de superficie applique la méthode standard : surface du fond + surface des parois (périmètre × profondeur moyenne).</p>
                         <div class="dim-grid" id="dimGrid">
                             <div class="input-group">
                                 <label for="length">Longueur (m)</label>
                                 <input type="number" id="length" name="length" min="2" max="30" step="0.1" value="8">
                                 <span class="input-hint">De 2 à 30 m</span>
                             </div>
-                            <div class="input-group" id="widthGroup">
+                            <div class="input-group">
                                 <label for="width">Largeur (m)</label>
                                 <input type="number" id="width" name="width" min="2" max="20" step="0.1" value="4">
                                 <span class="input-hint">De 2 à 20 m</span>
@@ -722,190 +624,59 @@
                             <div class="input-group">
                                 <label for="depthMin">Profondeur min. (m)</label>
                                 <input type="number" id="depthMin" name="depthMin" min="0.8" max="3" step="0.1" value="1.2">
-                                <span class="input-hint">De 0,8 à 3 m</span>
+                                <span class="input-hint">Petit bain</span>
                             </div>
                             <div class="input-group">
                                 <label for="depthMax">Profondeur max. (m)</label>
                                 <input type="number" id="depthMax" name="depthMax" min="0.8" max="3.5" step="0.1" value="2">
-                                <span class="input-hint">De 0,8 à 3,5 m</span>
+                                <span class="input-hint">Grand bain</span>
                             </div>
                         </div>
 
                         <div class="calc-preview">
-                            <div class="preview-row"><span>Surface développée estimée</span><strong id="surfacePreview">— m²</strong></div>
+                            <div class="preview-row"><span>Surface totale à couvrir (fond + parois)</span><strong id="surfacePreview">— m²</strong></div>
                             <div class="preview-row"><span>Volume approximatif</span><strong id="volumePreview">— m³</strong></div>
                         </div>
 
                         <div class="calc-actions">
-                            <button type="button" class="btn btn-ghost calc-prev">Retour</button>
                             <button type="button" class="btn btn-primary calc-next">Suivant
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Step 3: Revêtement -->
-                    <div class="calc-panel" data-panel="3">
-                        <h3>Quel revêtement souhaitez-vous ?</h3>
-                        <p class="calc-hint">Le choix du revêtement impacte le prix, la durabilité et l'esthétique de votre bassin.</p>
+                    <!-- Step 2: Membrane PVC armé -->
+                    <div class="calc-panel" data-panel="2">
+                        <h3>Choisissez votre membrane PVC armé</h3>
+                        <p class="calc-hint">Deux gammes Alkorplan, prix TTC posé par un professionnel.</p>
                         <div class="option-grid options-2">
                             <label class="option-card wide">
-                                <input type="radio" name="coating" value="liner" checked>
+                                <input type="radio" name="membrane" value="alkorplan-150" checked>
                                 <div class="option-content">
-                                    <div class="option-title">Liner</div>
-                                    <div class="option-desc">Solution éprouvée, économique et étanche. Idéal pour bassins rectangulaires.</div>
-                                    <div class="option-tag">à partir de 55 €/m²</div>
+                                    <div class="option-title">Alkorplan 150/100</div>
+                                    <div class="option-desc">Membrane PVC armé standard, garantie 10 ans. Idéale pour un renouvellement d'étanchéité durable.</div>
+                                    <div class="option-tag">88 €/m² TTC posé</div>
                                 </div>
                             </label>
                             <label class="option-card wide">
-                                <input type="radio" name="coating" value="pvc">
+                                <input type="radio" name="membrane" value="alkorplan-200">
                                 <div class="option-content">
-                                    <div class="option-title">PVC Armé</div>
-                                    <div class="option-desc">Membrane premium soudée sur mesure. Durée de vie exceptionnelle, adapté à toutes les formes.</div>
-                                    <div class="option-tag">à partir de 95 €/m²</div>
+                                    <div class="option-title">Alkorplan Touch 200/100</div>
+                                    <div class="option-desc">Membrane PVC armé haut de gamme, aspect texturé antidérapant, longévité maximale.</div>
+                                    <div class="option-tag">120 €/m² TTC posé</div>
                                 </div>
                             </label>
                         </div>
 
-                        <h3 style="margin-top:2.5rem">Épaisseur du revêtement</h3>
-                        <p class="calc-hint">L'épaisseur détermine la résistance et la longévité du revêtement.</p>
-                        <div class="option-grid options-2" id="thicknessLinerGroup">
-                            <label class="option-card wide">
-                                <input type="radio" name="thicknessLiner" value="75" checked>
-                                <div class="option-content">
-                                    <div class="option-title">Liner 75/100</div>
-                                    <div class="option-desc">Épaisseur standard, très bon rapport qualité-prix. Garantie 10 ans.</div>
-                                    <div class="option-tag">Standard</div>
-                                </div>
-                            </label>
-                            <label class="option-card wide">
-                                <input type="radio" name="thicknessLiner" value="100">
-                                <div class="option-content">
-                                    <div class="option-title">Liner 100/100</div>
-                                    <div class="option-desc">Épaisseur renforcée, résistance accrue aux poinçons et UV.</div>
-                                    <div class="option-tag">+ 18 €/m²</div>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="option-grid options-2" id="thicknessPvcGroup" style="display:none">
-                            <label class="option-card wide">
-                                <input type="radio" name="thicknessPvc" value="150" checked>
-                                <div class="option-content">
-                                    <div class="option-title">PVC Armé 150/100</div>
-                                    <div class="option-desc">Membrane armée standard, adaptée à la plupart des bassins.</div>
-                                    <div class="option-tag">Standard</div>
-                                </div>
-                            </label>
-                            <label class="option-card wide">
-                                <input type="radio" name="thicknessPvc" value="200">
-                                <div class="option-content">
-                                    <div class="option-title">PVC Armé 200/100</div>
-                                    <div class="option-desc">Membrane extra-renforcée, garantie longévité maximale (25+ ans).</div>
-                                    <div class="option-tag">+ 28 €/m²</div>
-                                </div>
-                            </label>
-                        </div>
-
-                        <h3 style="margin-top:2.5rem">Coloris et finition</h3>
-                        <div class="option-grid options-4 colors">
-                            <label class="option-card color">
-                                <input type="radio" name="color" value="bleu-clair" checked>
-                                <div class="color-swatch" style="background:linear-gradient(135deg,#a8d8f0,#7cc0e6)"></div>
-                                <span>Bleu clair</span>
-                            </label>
-                            <label class="option-card color">
-                                <input type="radio" name="color" value="bleu-fonce">
-                                <div class="color-swatch" style="background:linear-gradient(135deg,#3a7bb8,#1e4d7e)"></div>
-                                <span>Bleu foncé</span>
-                            </label>
-                            <label class="option-card color">
-                                <input type="radio" name="color" value="sable">
-                                <div class="color-swatch" style="background:linear-gradient(135deg,#e8dcc0,#c9b78a)"></div>
-                                <span>Sable</span>
-                            </label>
-                            <label class="option-card color">
-                                <input type="radio" name="color" value="gris">
-                                <div class="color-swatch" style="background:linear-gradient(135deg,#b8bcc0,#7a7f85)"></div>
-                                <span>Gris ardoise</span>
-                            </label>
-                        </div>
-
-                        <div class="calc-actions">
-                            <button type="button" class="btn btn-ghost calc-prev">Retour</button>
-                            <button type="button" class="btn btn-primary calc-next">Suivant
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: Options -->
-                    <div class="calc-panel" data-panel="4">
-                        <h3>Options complémentaires</h3>
-                        <p class="calc-hint">Sélectionnez les prestations à intégrer à votre chantier.</p>
+                        <h3 style="margin-top:2.5rem">Supplément éventuel</h3>
                         <div class="options-list">
                             <label class="option-line">
-                                <input type="checkbox" name="options" value="escalier">
+                                <input type="checkbox" name="depose">
                                 <div>
-                                    <span class="option-name">Escalier / banquette</span>
-                                    <span class="option-detail">Habillage complet des marches et banquette</span>
+                                    <span class="option-name">Dépose de l'ancien revêtement</span>
+                                    <span class="option-detail">Retrait de l'ancienne membrane et préparation du support</span>
                                 </div>
-                                <span class="option-plus">+ 850 €</span>
-                            </label>
-                            <label class="option-line">
-                                <input type="checkbox" name="options" value="frise">
-                                <div>
-                                    <span class="option-name">Frise décorative ligne d'eau</span>
-                                    <span class="option-detail">Frise personnalisée sur tout le pourtour</span>
-                                </div>
-                                <span class="option-plus">+ 480 €</span>
-                            </label>
-                            <label class="option-line">
-                                <input type="checkbox" name="options" value="antiderapant">
-                                <div>
-                                    <span class="option-name">Antidérapant fond de bassin</span>
-                                    <span class="option-detail">Traitement pente douce et marches</span>
-                                </div>
-                                <span class="option-plus">+ 32 €/m²</span>
-                            </label>
-                            <label class="option-line">
-                                <input type="checkbox" name="options" value="feutrine">
-                                <div>
-                                    <span class="option-name">Feutrine de protection 400g</span>
-                                    <span class="option-detail">Sous-couche isolante et protectrice</span>
-                                </div>
-                                <span class="option-plus">+ 12 €/m²</span>
-                            </label>
-                            <label class="option-line">
-                                <input type="checkbox" name="options" value="projecteurs">
-                                <div>
-                                    <span class="option-name">Projecteurs LED (jeu de 2)</span>
-                                    <span class="option-detail">Éclairage RGB télécommandé</span>
-                                </div>
-                                <span class="option-plus">+ 690 €</span>
-                            </label>
-                            <label class="option-line">
-                                <input type="checkbox" name="options" value="skimmer">
-                                <div>
-                                    <span class="option-name">Remplacement skimmers & buses</span>
-                                    <span class="option-detail">Pièces à sceller neuves</span>
-                                </div>
-                                <span class="option-plus">+ 420 €</span>
-                            </label>
-                            <label class="option-line">
-                                <input type="checkbox" name="options" value="preparation">
-                                <div>
-                                    <span class="option-name">Préparation du support</span>
-                                    <span class="option-detail">Ragréage et lissage béton</span>
-                                </div>
-                                <span class="option-plus">+ 28 €/m²</span>
-                            </label>
-                            <label class="option-line">
-                                <input type="checkbox" name="options" value="vidange">
-                                <div>
-                                    <span class="option-name">Vidange & remise en eau</span>
-                                    <span class="option-detail">Traitement de l'eau inclus</span>
-                                </div>
-                                <span class="option-plus">+ 380 €</span>
+                                <span class="option-plus">+ 1 200 €</span>
                             </label>
                         </div>
 
@@ -917,20 +688,18 @@
                         </div>
                     </div>
 
-                    <!-- Step 5: Result -->
-                    <div class="calc-panel" data-panel="5">
+                    <!-- Step 3: Résultat -->
+                    <div class="calc-panel" data-panel="3">
                         <div class="result-header">
                             <span class="eyebrow">Votre estimation</span>
                             <h3>Voici le budget estimé pour votre projet</h3>
                         </div>
                         <div class="result-price">
-                            <span class="price-from">Budget indicatif</span>
+                            <span class="price-from">Prix estimé</span>
                             <div class="price-range">
-                                <span id="priceMin">— €</span>
-                                <span class="price-sep">à</span>
-                                <span id="priceMax">— €</span>
+                                <span id="priceTotal">— €</span>
                             </div>
-                            <span class="price-ttc">TTC · pose et fournitures comprises</span>
+                            <span class="price-ttc">TTC · fourniture et pose comprises</span>
                         </div>
 
                         <div class="result-breakdown">
@@ -939,55 +708,13 @@
                         </div>
 
                         <div class="result-form">
-                            <h4>Recevoir le devis détaillé</h4>
-                            <p>Un conseiller vous contacte sous 24h pour affiner votre projet et convenir d'une visite technique gratuite.</p>
-                            <div class="form-grid">
-                                <div class="field">
-                                    <label for="quoteName">Nom complet <span class="req">*</span></label>
-                                    <input type="text" id="quoteName" name="name" placeholder="Jean Dupont" required>
-                                </div>
-                                <div class="field">
-                                    <label for="quoteEmail">Email <span class="req">*</span></label>
-                                    <input type="email" id="quoteEmail" name="email" placeholder="votre@email.fr" required>
-                                </div>
-                                <div class="field">
-                                    <label for="quotePhone">Téléphone <span class="req">*</span></label>
-                                    <input type="tel" id="quotePhone" name="phone" placeholder="06 12 34 56 78" required pattern="[0-9\s().+-]{8,}">
-                                </div>
-                                <div class="field">
-                                    <label for="quoteCity">Ville du chantier</label>
-                                    <input type="text" id="quoteCity" name="city" placeholder="Ex : Aix-en-Provence">
-                                </div>
-                            </div>
-
-                            <div class="field field-full">
-                                <label>Photos de votre bassin <span class="opt">(recommandé)</span></label>
-                                <p class="field-hint">Joignez 1 à 5 photos de votre piscine actuelle pour affiner le devis. Formats acceptés : JPG, PNG, HEIC · 5 Mo max par photo, 7 Mo total.</p>
-                                <div class="upload-zone" id="uploadZone">
-                                    <input type="file" id="quoteFiles" name="files" accept="image/*,.heic" multiple hidden>
-                                    <div class="upload-inner">
-                                        <div class="upload-icon">
-                                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-                                        </div>
-                                        <div class="upload-text">
-                                            <strong>Cliquez pour choisir</strong> ou glissez vos photos
-                                            <span>Jusqu'à 5 photos · 5 Mo max chacune</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul class="upload-list" id="uploadList"></ul>
-                            </div>
-
-                            <label class="consent">
-                                <input type="checkbox" id="quoteConsent" required>
-                                <span>J'accepte d'être recontacté pour la finalisation de mon devis.</span>
-                            </label>
-
-                            <button type="button" class="btn btn-primary btn-large" id="sendQuote">
-                                Envoyer ma demande
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
-                            </button>
-                            <p class="result-legal">Estimation indicative fondée sur des tarifs moyens 2026. Un devis ferme est établi après visite technique gratuite. Aucun engagement. Vos données sont traitées en confidentialité (RGPD).</p>
+                            <h4>Envoyer votre demande de devis par email</h4>
+                            <p>Un clic ouvre votre messagerie avec l'estimation pré-remplie. Ajoutez vos coordonnées, joignez des photos de votre bassin en pièces jointes et envoyez — nous vous répondons sous 24h.</p>
+                            <a href="mailto:goodpoolconcept@outlook.fr" class="btn btn-primary btn-large" id="sendQuoteMail">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                                Ouvrir ma messagerie
+                            </a>
+                            <p class="result-legal">Estimation indicative fondée sur des tarifs moyens 2026. Un devis ferme est établi après visite technique gratuite. Aucun engagement.</p>
                         </div>
 
                         <div class="calc-actions">
@@ -1127,19 +854,15 @@
                         </a>
                     </div>
                 </div>
-                <form class="contact-form" novalidate>
+                <div class="contact-form">
                     <h3>Envoyer un message</h3>
-                    <div class="form-grid">
-                        <input type="text" name="name" placeholder="Nom" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <input type="tel" name="phone" placeholder="Téléphone">
-                        <input type="text" name="city" placeholder="Ville">
-                    </div>
-                    <textarea name="message" placeholder="Décrivez votre projet..." rows="5" required></textarea>
-                    <button type="submit" class="btn btn-primary btn-large">Envoyer le message
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
-                    </button>
-                </form>
+                    <p class="contact-intro">Écrivez-nous directement depuis votre messagerie. Vous pourrez décrire votre projet et joindre des photos de votre bassin en pièces jointes.</p>
+                    <a href="mailto:goodpoolconcept@outlook.fr?subject=Demande%20d'informations%20-%20Good%20Pool%20Concept" class="btn btn-primary btn-large">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                        Ouvrir ma messagerie
+                    </a>
+                    <p class="contact-legal">Un clic ouvre votre application mail par défaut avec goodpoolconcept@outlook.fr en destinataire.</p>
+                </div>
             </div>
         </div>
     </section>
