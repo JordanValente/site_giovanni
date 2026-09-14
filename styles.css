@@ -1077,6 +1077,27 @@ section { padding: 120px 0; }
 }
 .gallery-item:hover .gallery-img { transform: scale(1.05); }
 
+/* Variante : images affichées en entier avec cadre adapté à leur ratio */
+.gallery-contain {
+    grid-auto-rows: auto;
+    align-items: start;
+}
+.gallery-contain .gallery-item {
+    background: transparent;
+    box-shadow: 0 6px 24px rgba(10, 31, 46, 0.12);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: default;
+}
+.gallery-contain .gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.6s ease;
+}
+.gallery-contain .gallery-item:hover img { transform: scale(1.04); }
+.gallery-contain .gallery-item::after { display: none; }
+
 /* ---------- Processus ---------- */
 .processus { background: var(--bg-alt); }
 .process-timeline {
