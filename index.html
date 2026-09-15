@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">peut
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GOOD POOL CONCEPT — Spécialiste rénovation piscine · Liner & PVC Armé</title>
     <meta name="description" content="Spécialiste rénovation piscine. Pose de liner et PVC armé sur mesure. Devis gratuit en ligne, intervention sur toute la région.">
@@ -18,16 +18,17 @@
             <a href="#accueil" class="nav-logo">
                 <img src="logo/logo.png" alt="Good Pool Concept" class="logo-img">
             </a>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#services">Prestations</a></li>
                 <li><a href="#coloris">Coloris</a></li>
                 <li><a href="#tarifs">Tarifs</a></li>
                 <li><a href="#realisations">Réalisations</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li class="nav-menu-cta"><a href="#devis" class="nav-cta">Devis gratuit</a></li>
             </ul>
-            <a href="#devis" class="nav-cta">Devis gratuit</a>
-            <button class="nav-toggle" aria-label="Menu">
+            <a href="#devis" class="nav-cta nav-cta-desktop">Devis gratuit</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMenu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -792,5 +793,43 @@
         </div>
     </footer>
 
+    <script>
+        (function () {
+            const toggle = document.getElementById('navToggle');
+            const menu = document.getElementById('navMenu');
+            const nav = document.querySelector('.nav');
+            if (!toggle || !menu) return;
+
+            function closeMenu() {
+                menu.classList.remove('open');
+                toggle.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('nav-open');
+            }
+            function openMenu() {
+                menu.classList.add('open');
+                toggle.classList.add('open');
+                toggle.setAttribute('aria-expanded', 'true');
+                document.body.classList.add('nav-open');
+            }
+            toggle.addEventListener('click', function () {
+                if (menu.classList.contains('open')) closeMenu(); else openMenu();
+            });
+            menu.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', closeMenu);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeMenu();
+            });
+
+            // Nav scrolled state
+            function onScroll() {
+                if (window.scrollY > 20) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+    </script>
 </body>
 </html>

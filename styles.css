@@ -149,8 +149,28 @@ input, textarea { font-family: inherit; font-size: 1rem; }
     box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
 }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4); }
-.nav-toggle { display: none; flex-direction: column; gap: 4px; }
-.nav-toggle span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 60;
+}
+.nav-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.nav-menu-cta { display: none; }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -1239,51 +1259,160 @@ section { padding: 120px 0; }
     .hero-inner { grid-template-columns: 1fr; gap: 40px; }
     .hero-visual { height: 400px; max-width: 600px; }
     .coloris-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-container { padding: 0 24px; }
 }
 
 @media (max-width: 900px) {
-    .nav-menu { display: none; }
+    /* --- Nav mobile --- */
+    .nav-container { padding: 8px 20px; gap: 12px; }
+    .nav-cta-desktop { display: none; }
     .nav-toggle { display: flex; }
-    .nav-cta { display: none; }
-    .logo-img { height: 90px; }
-    .nav.scrolled .logo-img { height: 72px; }
-    section { padding: 80px 0; }
-    .hero { padding: 150px 24px 60px; }
-    .hero-actions { flex-direction: column; }
-    .hero-actions .btn { justify-content: center; }
-    .hero-stats { gap: 32px; }
-    .hero-visual { height: 340px; }
-    .hero-badge { left: 0; }
+    .logo-img { height: 72px; }
+    .nav.scrolled .logo-img { height: 60px; }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(320px, 85vw);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 0;
+        padding: 96px 28px 32px;
+        background: var(--bg, #fdfaf3);
+        box-shadow: -8px 0 32px rgba(10, 31, 46, 0.16);
+        transform: translateX(100%);
+        transition: transform 0.32s ease;
+        overflow-y: auto;
+        z-index: 55;
+        font-size: 1rem;
+    }
+    .nav-menu.open { transform: translateX(0); }
+    .nav-menu li { list-style: none; }
+    .nav-menu a {
+        display: block;
+        padding: 14px 4px;
+        border-bottom: 1px solid rgba(10, 31, 46, 0.08);
+        font-weight: 500;
+    }
+    .nav-menu-cta { display: block; margin-top: 12px; border: none; }
+    .nav-menu-cta a { border: none; padding: 0; }
+    .nav-menu-cta .nav-cta {
+        display: inline-flex;
+        margin-top: 8px;
+        padding: 14px 28px;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    body.nav-open { overflow: hidden; }
+    body.nav-open::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 31, 46, 0.35);
+        z-index: 50;
+        animation: fadeIn 0.3s ease;
+    }
+
+    /* --- Sections / layout global --- */
+    section { padding: 72px 0; }
+    .section-head { margin-bottom: 44px; }
+    .section-head p { font-size: 1rem; }
+    .container { padding: 0 20px; }
+
+    /* --- Hero --- */
+    .hero { padding: 140px 20px 60px; min-height: auto; }
+    .hero-inner { gap: 32px; }
+    .hero-content { text-align: left; }
+    .hero-actions { flex-direction: column; gap: 12px; margin-bottom: 48px; }
+    .hero-actions .btn { width: 100%; justify-content: center; }
+    .hero-stats { gap: 24px; padding-top: 32px; }
+    .stat-num { font-size: 1.6rem; }
+    .hero-visual { height: 320px; max-width: 100%; }
+    .hero-badge { left: 0; padding: 12px 16px; }
+    .hero-badge strong { font-size: 0.8rem; }
+    .hero-badge span { font-size: 0.7rem; }
+
+    /* --- Grids --- */
     .services-grid, .options-2, .form-grid, .dim-grid { grid-template-columns: 1fr; }
     .options-4 { grid-template-columns: repeat(2, 1fr); }
-    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .gallery-item.large, .gallery-item.wide { grid-column: span 2; grid-row: span 1; }
-    .process-timeline { grid-template-columns: 1fr; gap: 32px; }
+    .process-timeline { grid-template-columns: 1fr; gap: 24px; }
     .process-timeline::before { display: none; }
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
-    .footer-bottom { flex-direction: column; gap: 8px; }
-    .calc-form { padding: 32px 24px; }
-    .calc-progress { padding: 24px 24px 0; }
-    .calc-steps { font-size: 0.75rem; }
-    .calc-step i { width: 22px; height: 22px; }
-    .container { padding: 0 24px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+    /* --- Cards --- */
     .service-media { height: 180px; }
-    .coloris-img { height: 200px; }
-    .tarif-grid { grid-template-columns: repeat(2, 1fr); }
-    .tarifs-included { grid-template-columns: 1fr; padding: 28px; }
+    .coloris-img { height: 180px; }
+    .coloris-card figcaption { padding: 16px 18px; gap: 12px; }
+    .coloris-swatch { width: 36px; height: 36px; }
+
+    /* --- Tarifs --- */
+    .tarif-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .tarif-card { padding: 20px; }
+    .tarif-dim { font-size: 1.15rem; }
+    .tarif-price strong { font-size: 1.6rem; }
+    .tarifs-included { grid-template-columns: 1fr; padding: 24px; }
     .tarifs-cta { flex-direction: column; text-align: center; padding: 24px; }
     .materiel-grid { grid-template-columns: 1fr; }
-    .tarif-tab { padding: 10px 16px; font-size: 0.82rem; }
-    .tarifs-tabs { padding: 4px; }
+    .tarif-tab { padding: 10px 14px; font-size: 0.8rem; }
+    .tarifs-tabs { padding: 4px; flex-wrap: wrap; gap: 4px; }
+
+    /* --- Devis (CTA Renolit) --- */
+    .devis .calculator { padding: 2rem 1.25rem !important; }
+    .devis .calculator .btn-large { width: 100%; }
+
+    /* --- Calc form (legacy, still may render) --- */
+    .calc-form { padding: 32px 20px; }
+    .calc-progress { padding: 24px 20px 0; }
+    .calc-steps { font-size: 0.75rem; }
+    .calc-step i { width: 22px; height: 22px; }
 }
 
-@media (max-width: 500px) {
-    .options-3, .options-4 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 600px) {
+    section { padding: 60px 0; }
+    .section-head { margin-bottom: 36px; }
+    .hero { padding: 130px 16px 48px; }
+    .hero-tag { font-size: 0.72rem; padding: 6px 12px; margin-bottom: 20px; }
+    .hero-subtitle { font-size: 1rem; margin-bottom: 28px; }
+    .hero-stats { gap: 20px; }
+    .stat-num { font-size: 1.4rem; }
+    .stat-label { font-size: 0.78rem; }
+    .hero-visual { height: 260px; }
+    .hero-img-main { width: 82%; height: 68%; }
+    .hero-img-secondary { width: 58%; height: 46%; border-width: 4px; }
+
+    .container { padding: 0 16px; }
+    .coloris-grid { grid-template-columns: 1fr; gap: 14px; }
+    .coloris-img { height: 140px; }
+    .gallery-contain { grid-auto-rows: auto; }
+    .gallery { grid-template-columns: 1fr; }
+    .gallery-item.large, .gallery-item.wide { grid-column: span 1; }
+    .tarif-grid { grid-template-columns: 1fr; }
+    .tarif-tab { flex: 1 1 calc(50% - 4px); font-size: 0.75rem; padding: 8px 10px; }
+    .tarif-tab svg { display: none; }
+    .options-3, .options-4 { grid-template-columns: 1fr; }
     .calc-steps { display: none; }
     .calc-actions { flex-direction: column-reverse; gap: 12px; }
     .calc-actions .btn { width: 100%; justify-content: center; }
-    .footer-top { grid-template-columns: 1fr; }
-    .tarif-grid { grid-template-columns: 1fr; }
-    .tarif-tab svg { display: none; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .btn, .btn-large { font-size: 0.95rem; padding: 14px 24px; }
+    .btn-large { padding: 16px 28px; }
+}
+
+@media (max-width: 380px) {
+    .hero { padding: 120px 14px 40px; }
+    .hero-badge { padding: 10px 14px; gap: 8px; }
+    .hero-badge strong { font-size: 0.75rem; }
+    .hero-visual { height: 220px; }
+    .container { padding: 0 14px; }
+    .logo-img { height: 60px; }
+    .nav.scrolled .logo-img { height: 52px; }
+    .hero-stats { flex-direction: column; gap: 16px; align-items: flex-start; }
 }
