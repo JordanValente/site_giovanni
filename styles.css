@@ -664,51 +664,6 @@ section { padding: 120px 0; }
 
 /* ---------- Calculator ---------- */
 .devis { background: var(--white); }
-
-/* Séparateur "ou" entre le calculateur et les alternatives */
-.devis-divider {
-    max-width: 960px;
-    margin: 48px auto 32px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    color: var(--ink-muted);
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-}
-.devis-divider::before,
-.devis-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-}
-
-/* Cartes alternatives (simulateur externe + email) */
-.devis-alt {
-    max-width: 960px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-.devis-alt-card {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 28px 28px 32px;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: var(--transition);
-}
-.devis-alt-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-.devis-alt-card h3 { font-size: 1.25rem; margin-bottom: 4px; }
-.devis-alt-card p { color: var(--ink-muted); font-size: 0.95rem; line-height: 1.55; margin: 0 0 12px; }
-.devis-alt-card .btn { align-self: flex-start; }
-
 .calculator {
     max-width: 960px;
     margin: 0 auto;
@@ -1409,10 +1364,6 @@ section { padding: 120px 0; }
     .tarif-tab { padding: 10px 14px; font-size: 0.8rem; }
     .tarifs-tabs { padding: 4px; flex-wrap: wrap; gap: 4px; }
 
-    /* --- Devis --- */
-    .devis-alt { grid-template-columns: 1fr; }
-    .devis-divider { margin: 36px auto 24px; }
-    .devis-alt-card .btn { align-self: stretch; justify-content: center; }
 
     /* --- Calc form (legacy, still may render) --- */
     .calc-form { padding: 32px 20px; }
